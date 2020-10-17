@@ -10,6 +10,7 @@ from django.db import connection
 --------------------------------------------------------------------------AI'''
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
 from channels.db import database_sync_to_async
+from asgiref.sync import sync_to_async
 import bleach
 
 
@@ -89,6 +90,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         WebSocket methods below
     -------------------------------------------------------------------AI
     '''
+    @sync_to_async
     async def connect(self):
         self.user = self.scope['user']
 
